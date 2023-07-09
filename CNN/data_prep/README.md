@@ -16,6 +16,8 @@ This class represents a custom dataset for a convolutional neural network (CNN).
 
 ```python
 from custom_cnn_dataset import CustomCNNDataset
+```
+
 Copy
 Usage
 Initialization
@@ -49,4 +51,7 @@ root_dir: The root directory containing the image data.
 transform: The transformation function to be applied to the loaded images.
 classes: A sorted list of class names, derived from the subdirectories in the root directory.
 image_paths: A list of paths to all the images in the dataset
+
+```
+
 ```
