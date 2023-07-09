@@ -14,7 +14,7 @@ cd torch_template/CNN/data_prep
 - Import the class:
 
 ```python
-from custom_cnn_dataset import CustomCNNDataset
+from data_preparation import CustomCNNDataset
 ```
 
 Usage
