@@ -1,5 +1,7 @@
 # CustomResnet101
 
+### First time usage will download the necessary files from torchvision
+
 `CustomResnet101` is a custom implementation of the ResNet-101 architecture with a modified fully connected (FC) layer at the end. It is designed for computer vision tasks, such as image classification.
 
 ## Usage
