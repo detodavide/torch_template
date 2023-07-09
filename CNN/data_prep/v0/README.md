@@ -12,7 +12,7 @@ git clone https://github.com/detodavide/torch_template.git
 - Navigate to the CNN/data_prep directory:
 
 ```bash
-cd torch_template/CNN/data_prep
+cd torch_template/CNN/data_prep/v0
 ```
 
 - Import the class:
