@@ -13,6 +13,7 @@ __pycache__/
 # Distribution / packaging
 CNN/example_data/
 CNN/data_prep/data_prep_test.ipynb
+CNN/model_prep/model_test.ipynb
 .Python
 build/
 develop-eggs/
