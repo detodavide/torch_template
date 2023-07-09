@@ -68,6 +68,15 @@ class CustomCNNDataset(Dataset):
 
 if __name__ == '_name__':
 
-    dataset = CustomCNNDataset(root_dir=r'example_data\animals151\dataset')
+    # EXAMPLE
+    PATH = 'path\to\dataset'
+    dataset = CustomCNNDataset(root_dir=rf'{PATH}')
 
-    print(dataset)
+    train_idx, val_idx = dataset.splitter(splits=[85, 15])
+
+    train_dataset = Subset(dataset, train_idx)
+    val_dataset = Subset(dataset, val_idx)
+
+    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+
+    val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False)
