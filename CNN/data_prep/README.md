@@ -1,55 +1,52 @@
-# Class: CustomCNNDataset
+# CustomCNNDataset
 
-Description:
 This class represents a custom dataset for a convolutional neural network (CNN). It is designed to load and preprocess image data from a specified directory. The dataset can be used for tasks such as image classification.
 
-Constructor:
-CustomCNNDataset(root_dir, transform=None)
+## Installation
 
-Parameters:
+1. Clone the repository:
+   Copy
+   git clone https://github.com/detodavide/torch_template.git
 
-- root_dir (string): The root directory containing the image data. It should have subdirectories, where each subdirectory represents a different class of images.
-- transform (callable, optional): A function or transformation to apply to the loaded images. It can be used for data augmentation or preprocessing. Default is None.
+2. Navigate to the `CNN/data_prep` directory:
+   Copy
+   cd torch_template/CNN/data_prep
 
-Methods:
+3. Import the class:
 
-- **len**(): Returns the total number of images in the dataset.
-- **getitem**(index): Retrieves a specific image and its corresponding label from the dataset, based on the given index.
-- splitter(splits=[85,15]): Splits the dataset into training and validation subsets.
+```python
+from custom_cnn_dataset import CustomCNNDataset
+Copy
+Usage
+Initialization
+To initialize the dataset, create an instance of the CustomCNNDataset class:
 
-  - Parameters:
+dataset = CustomCNNDataset(root_dir='path/to/data', transform=data_transform)
+Copy
+The root_dir parameter specifies the root directory containing the image data. It should have subdirectories, where each subdirectory represents a different class of images. The transform parameter is an optional function or transformation to apply to the loaded images. It can be used for data augmentation or preprocessing.
 
-    - splits (list, optional): A list specifying the desired split ratios for training and validation subsets. The sum of the ratios should be equal to 100. Default is [85, 15].
+Length
+To access the length of the dataset, use the len() method:
 
-  - Returns:
-    - train_split (Subset): A subset of the dataset containing the training images and their labels.
-    - val_split (Subset): A subset of the dataset containing the validation images and their labels.
+length = len(dataset)
+Copy
+Retrieval
+To retrieve a specific image and its corresponding label from the dataset, based on the given index, use the getitem() method:
 
-Attributes:
+image, label = dataset[0]
+Copy
+Splitting
+To split the dataset into training and validation subsets, use the splitter() method:
 
-- root_dir (string): The root directory containing the image data.
-- transform (callable): The transformation function to be applied to the loaded images.
-- classes (list): A sorted list of class names, derived from the subdirectories in the root directory.
-- image_paths (list): A list of paths to all the images in the dataset.
-- labels (list): A list of labels corresponding to each image in the dataset.
+train_split, val_split = dataset.splitter(splits=[85, 15])
+Copy
+The splits parameter is a list specifying the desired split ratios for training and validation subsets. The sum of the ratios should be equal to 100. The default value is [85, 15].
 
-Usage:
+Attributes
+The following attributes are available for the CustomCNNDataset class:
 
-1. Initialize the dataset:
-   dataset = CustomCNNDataset(root_dir='path/to/data', transform=data_transform)
-
-2. Access the length of the dataset:
-   length = len(dataset)
-
-3. Retrieve a specific image and its label:
-   image, label = dataset[index]
-
-4. Split the dataset into training and validation subsets:
-   train_set, val_set = dataset.splitter(splits=[80, 20])
-
-Note:
-
-- It is assumed that the directory structure follows the convention of having subdirectories named after the classes and containing the corresponding images.
-- The dataset assumes that the images are in RGB format. If the images are in a different format, modifications to the code may be required.
-- The one-hot encoding of the labels is performed using the `one_hot` function, which converts the label to a one-hot tensor representation.
-- The `splitter` method uses the `random_split` function from PyTorch to split the dataset randomly based on the given split ratios.
+root_dir: The root directory containing the image data.
+transform: The transformation function to be applied to the loaded images.
+classes: A sorted list of class names, derived from the subdirectories in the root directory.
+image_paths: A list of paths to all the images in the dataset
+```
