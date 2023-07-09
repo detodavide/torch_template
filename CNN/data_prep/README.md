@@ -1,7 +1,5 @@
-## Bing
+# CustomCNNDataset
 
-I see. Here's a more detailed documentation-style README.md file:
-CustomCNNDataset
 This class represents a custom dataset for a convolutional neural network (CNN). It is designed to load and preprocess image data from a specified directory. The dataset can be used for tasks such as image classification.
 Installation
 
