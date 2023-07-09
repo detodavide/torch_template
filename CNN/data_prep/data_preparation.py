@@ -70,7 +70,14 @@ if __name__ == '_name__':
 
     # EXAMPLE
     PATH = 'path\to\dataset'
-    dataset = CustomCNNDataset(root_dir=rf'{PATH}')
+
+    transform = Compose([
+                    Resize((224, 224)),  
+                    ToTensor(),
+                    Normalize(mean=(.5,), std=(.5,))
+                ])
+    
+    dataset = CustomCNNDataset(root_dir=rf'{PATH}', transform=transform)
 
     train_idx, val_idx = dataset.splitter(splits=[85, 15])
 
