@@ -5,11 +5,15 @@ Installation
 
 - Clone the repository:
 
+```bash
 git clone https://github.com/detodavide/torch_template.git
+```
 
 - Navigate to the CNN/data_prep directory:
 
+```bash
 cd torch_template/CNN/data_prep
+```
 
 - Import the class:
 
