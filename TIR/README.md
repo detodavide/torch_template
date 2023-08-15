@@ -1,4 +1,3 @@
-```markdown
 # PyTorch Training and Inference Runner (TIR)
 
 The PyTorch Training and Inference Runner (TIR) is a Python script designed to streamline the process of training, validating, checkpointing, and making predictions using PyTorch models. It provides a class called `TIR` that encapsulates common functionalities required during the machine learning lifecycle.
@@ -20,7 +19,7 @@ The PyTorch Training and Inference Runner (TIR) is a Python script designed to s
 
 Install the required packages using the following command:
 
-```
+```python
 pip install torch numpy matplotlib
 ```
 
@@ -104,12 +103,3 @@ predictions = tir.predict(input_data)
 tir.plot_losses()
 plt.show()
 ```
-
-## License
-
-This script is released under the [MIT License](LICENSE).
-
-Feel free to use, modify, and distribute it as needed.
-```
-
-Please note that you may want to tailor the README to include any additional information, context, examples, or usage details specific to your project.
