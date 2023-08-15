@@ -6,7 +6,6 @@ import torch.optim as optim
 import torch.nn as nn
 import torch.functional as F
 from torch.utils.data import DataLoader, TensorDataset, random_split
-from torch.utils.tensorboard import SummaryWriter
 
 import matplotlib.pyplot as plt
 plt.style.use('fivethirtyeight')

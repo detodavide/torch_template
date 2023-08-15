@@ -34,7 +34,6 @@ import torch.optim as optim
 import torch.nn as nn
 import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader, TensorDataset, random_split
-from torch.utils.tensorboard import SummaryWriter
 ```
 
 2. Copy and paste the `TIR` class definition into your script.
