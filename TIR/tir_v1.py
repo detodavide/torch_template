@@ -48,46 +48,36 @@ class TIR(object):
     def _make_train_step_fn(self):
 
         def perform_train_step_fn(x, y):
-            # Sets model to TRAIN mode
+
             self.model.train()
 
-            # Step 1 - Computes our model's predicted output - forward pass
             yhat = self.model(x)
-            # Step 2 - Computes the loss
+
             loss = self.loss_fn(yhat, y)
-            # Step 3 - Computes gradients for both "b" and "w" parameters
+
             loss.backward()
-            # Step 4 - Updates parameters using gradients and the
-            # learning rate
             self.optimizer.step()
             self.optimizer.zero_grad()
 
-            # Returns the loss
             return loss.item()
 
-        # Returns the function that will be called inside the train loop
         return perform_train_step_fn
 
     def _make_val_step_fn(self):
-        # Builds function that performs a step in the validation loop
+
         def perform_val_step_fn(x, y):
-            # Sets model to EVAL mode
+
             self.model.eval()
 
-            # Step 1 - Computes our model's predicted output - forward pass
             yhat = self.model(x)
-            # Step 2 - Computes the loss
             loss = self.loss_fn(yhat, y)
-            # There is no need to compute Steps 3 and 4, 
-            # since we don't update parameters during evaluation
+
             return loss.item()
 
         return perform_val_step_fn
 
     def _mini_batch(self, validation=False):
-        # The mini-batch can be used with both loaders
-        # The argument `validation`defines which loader and 
-        # corresponding step function is going to be used
+
         if validation:
             data_loader = self.val_loader
             step_fn = self.val_step_fn
@@ -98,8 +88,6 @@ class TIR(object):
         if data_loader is None:
             return None
 
-        # Once the data loader and step function, this is the same
-        # mini-batch loop we had before
         mini_batch_losses = []
         for x_batch, y_batch in data_loader:
             x_batch = x_batch.to(self.device)
@@ -119,30 +107,25 @@ class TIR(object):
         np.random.seed(seed)
 
     def train(self, n_epochs, seed=13):
-        # To ensure reproducibility of the training process
+
         self.set_seed(seed)
         
         for epoch in range(n_epochs):
-            # Keeps track of the numbers of epochs
-            # by updating the corresponding attribute
+
             self.tot_epochs += 1
 
-            # inner loop
-            # Performs training using mini-batches
             loss = self._mini_batch(validation=False)
             self.losses.append(loss)
 
-            # VALIDATION
-            # no gradients in validation!
             with torch.no_grad():
-                # Performs evaluation using mini-batches
+
                 val_loss = self._mini_batch(validation=True)
                 self.val_losses.append(val_loss)
 
-            print(f"Epoch {epoch}/{n_epochs}: loss = {loss}, val_loss = {val_loss}")
+            print(f"Epoch {self.tot_epochs}/{n_epochs}: loss = {loss}, val_loss = {val_loss}")
 
     def save_checkpoint(self, filename):
-        # Builds dictionary with all elements for resuming training
+
         checkpoint = {'epoch': self.total_epochs,
                     'model_state_dict': self.model.state_dict(),
                     'optimizer_state_dict': self.optimizer.state_dict(),
@@ -152,10 +135,9 @@ class TIR(object):
         torch.save(checkpoint, filename)
 
     def load_checkpoint(self, filename):
-        # Loads dictionary
+
         checkpoint = torch.load(filename)
 
-        # Restore state for model and optimizer
         self.model.load_state_dict(checkpoint['model_state_dict'])
         self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
 
@@ -163,19 +145,19 @@ class TIR(object):
         self.losses = checkpoint['loss']
         self.val_losses = checkpoint['val_loss']
 
-        self.model.train() # always use TRAIN for resuming training  
+        self.model.train() 
             
 
     def predict(self, x):
-        # Set is to evaluation mode for predictions
+
         self.model.eval() 
-        # Takes aNumpy input and make it a float tensor
+
         x_tensor = torch.as_tensor(x).float()
-        # Send input to device and uses model for prediction
+
         y_hat_tensor = self.model(x_tensor.to(self.device))
-        # Set it back to train mode
+
         self.model.train()
-        # Detaches it, brings it to CPU and back to Numpy
+
         return y_hat_tensor.detach().cpu().numpy()
     
     def plot_losses(self):
